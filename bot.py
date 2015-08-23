@@ -1,5 +1,7 @@
 __author__ = 'Luis Mario'
 
+import re
+
 
 def comando(*comandos):
     """
@@ -22,10 +24,14 @@ class MensajeIRC:
     def __init__(self, irc_input):
         self.raw = irc_input
 
-        self.sender = None
-        self.host = None
-        self.comando = None
-        self.mensaje = None
+        self.mensaje_usuario = r"^\:(\w+)\!"
+
+        self.sender = ""
+        self.host = ""
+        self.comando = ""
+        self.mensaje = ""
+
+        self._procesar_input()
 
         # Usuario envia mensaje:
         # :Bonifacio!~luismario@26280F2.B9600A42.6C8DACE8.IP PRIVMSG #mambre :test
@@ -38,16 +44,21 @@ class MensajeIRC:
         # :Bonifacio!~luismario@26280F2.B9600A42.6C8DACE8.IP PART #mambre
 
     def _procesar_input(self):
-        if self.raw.startswith(':'):
+        if re.match(self.mensaje_usuario, self.raw):
+            print("Mensaje de user detectado")
             # existe un sender
             sender, tail = self.raw.split('!', maxsplit=1)
             self.sender = sender.strip(':')
 
             # se obtiene mensaje
-            cuerpo, self.mensaje = tail.split(':', maxsplit=1)
+            if ':' in tail:
+                cuerpo, self.mensaje = tail.split(':', maxsplit=1)
 
-            # se obtiene comando y host
-            self.host, self.comando = cuerpo.split(' ', maxsplit=1)
+                # se obtiene comando y host
+                self.host, self.comando = cuerpo.split(' ', maxsplit=1)
+
+            else:
+                self.host, self.comando = tail.split(' ', maxsplit=1)
 
         else:
             return
@@ -71,7 +82,7 @@ class Bot:
     def agregar_modulo(self, modulo):
         pass
 
-    def isCommand(self, cmd):
+    def is_command(self, cmd):
         if cmd in self.comandos:
             return True
         else:
@@ -79,9 +90,3 @@ class Bot:
 
     def ejecutar_comando(self, cmd, irc_input):
         self.comandos[cmd](self, irc_input)
-
-
-
-
-
-

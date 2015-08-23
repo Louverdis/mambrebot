@@ -51,7 +51,7 @@ class IRCSock:
             irc_msj = irc_msj.decode('utf-8').strip('\r\n')
             print(irc_msj)
 
-            mensaje = bot.MensajeIRC(irc_input)
+            mensaje = bot.MensajeIRC(irc_msj)
 
             if mensaje.mensaje.find(".Hola {0}".format(NICK)) != -1:
                 self.enviar_msj("Hola {0}, gracias por saludar".format(mensaje.sender))
@@ -61,6 +61,9 @@ class IRCSock:
 
             if mensaje.mensaje.find("ugh") != -1:
                 self.enviar_msj("ughUGH**__--_{0}_--__**HGUhgu".format(mensaje.sender))
+
+            if irc_msj.find("JOIN :") != -1:
+                self.enviar_msj("Bienvenido {0}".format(mensaje.sender))
 
             if irc_msj.find("PING :") != -1:
                 self.ping()
