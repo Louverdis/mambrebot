@@ -48,11 +48,11 @@ def activar_mambre(bot, mensaje):
 @bot.comando('.siguiente', '.next')
 def procesar_evento(bot, mensaje):
     if not bot.mambre_activo:
-        bot.irc_sock.enviar_msj("Es necesario activar una sesion de juego primero (.mambegaem)")
+        bot.irc_sock.enviar_msj("Es necesario activar una sesion de juego primero (.mambregaem)")
         return
 
     if len(tributos) > 1:
-        _str = ("MAMBRE GAEMSS, DIA {0} - {1}".format(str(dia), evento[bot.n_eventos]))
+        _str = ("MAMBRE GAEMSS, DIA {0} - {1}".format(str(bot.dia), evento[bot.n_eventos]))
         if bot.dia == 25:
             bot.irc_sock.enviar_msj(
                 "De pronto, los cielos se pusieron obscuros. pero en el centro, se podia ver la enorme silueta de "
@@ -255,9 +255,9 @@ def procesar_evento(bot, mensaje):
             bot.dia += 1
             bot.n_eventos = 0
 
-    if len(tributos) == 0:
-        bot.irc_sock.enviar_msj("TODOS MURIERROOON!")
-        bot.mambre_activo = False
+        if len(tributos) == 0:
+            bot.irc_sock.enviar_msj("TODOS MURIERROOON!")
+            bot.mambre_activo = False
 
     else:
         bot.irc_sock.enviar_msj("EL GANADOR ES: " + tributos[0].nombre)

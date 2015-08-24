@@ -1,6 +1,7 @@
 __author__ = 'Luis Mario'
 
 import bot
+from mambregaem import gaem
 
 from socket import socket, AF_INET, SOCK_STREAM
 
@@ -24,6 +25,21 @@ NICK = "mambrebot"
 class IRCSock:
     def __init__(self):
         self.client_sock = socket(AF_INET, SOCK_STREAM)
+        self.bot = bot.Bot(self)
+
+        self.bot.agregar_modulo(gaem)
+
+        # for cmd in gaem.listar_tributos.comandos:
+        #     self.bot.agregar_comando(cmd, gaem.listar_tributos)
+
+        # for cmd in gaem.agregar_tributo.comandos:
+        #     self.bot.agregar_comando(cmd, gaem.agregar_tributo)
+
+        # for cmd in gaem.activar_mambre.comandos:
+        #     self.bot.agregar_comando(cmd, gaem.activar_mambre)
+
+        # for cmd in gaem.procesar_evento.comandos:
+        #     self.bot.agregar_comando(cmd, gaem.procesar_evento)
 
     def conectar(self):
         self.client_sock.connect((SERVER, 6667))
@@ -67,6 +83,14 @@ class IRCSock:
 
             if irc_msj.find("PING :") != -1:
                 self.ping()
+
+            msj_header = mensaje.mensaje.split(' ')[0]
+            print(msj_header)
+            if self.bot.es_comando(msj_header):
+                print('Se detecto un posible comando')
+                if self.bot.es_comando_valido(msj_header):
+                    print('Se detecto un comando')
+                    self.bot.ejecutar_comando(msj_header, mensaje.mensaje)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 __author__ = 'Luis Mario'
 
 import re
+import inspect
 
 
 def comando(*comandos):
@@ -80,9 +81,20 @@ class Bot:
         self.comandos[cmd] = funcion
 
     def agregar_modulo(self, modulo):
-        pass
+        funciones = inspect.getmembers(modulo, inspect.isfunction)
+        for funcion in funciones:
+            _, func = funcion
+            if hasattr(func, 'comandos'):
+                for cmd in func.comandos:
+                    self.comandos[cmd] = func
 
-    def is_command(self, cmd):
+    def es_comando(self, cmd):
+        if len(cmd) > 0:
+            if cmd[0] == '.':
+                return True
+        return False
+
+    def es_comando_valido(self, cmd):
         if cmd in self.comandos:
             return True
         else:
