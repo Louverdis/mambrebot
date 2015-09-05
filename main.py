@@ -1,6 +1,5 @@
 __author__ = 'Luis Mario'
 
-
 from socket import socket, AF_INET, SOCK_STREAM
 
 # From RFC2812 Internet Relay Chat: Client Protocol
