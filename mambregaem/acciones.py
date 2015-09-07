@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-__author__ = 'Luis Mario'
+__author__ = 'Luis Mario Reyes Moreno'
 
 import random
 
