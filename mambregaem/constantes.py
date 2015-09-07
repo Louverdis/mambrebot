@@ -1,9 +1,11 @@
-'''
+"""
 Created on 07/03/2015
 
 @author: Luis Mario
-'''
+"""
+
 from mambregaem.entidades import Tributo, Arma, Trampa
+
 
 def enum(*secuenciales, **kwarg):
     """Funcion que retorna Enumeraciones, funcionan de manera similar a
