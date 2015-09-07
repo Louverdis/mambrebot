@@ -27,6 +27,7 @@ class MensajeIRC:
 
         self.mensaje_usuario = r"^\:(\w+)\!"
 
+
         self.sender = ""
         self.host = ""
         self.comando = ""
