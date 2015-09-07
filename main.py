@@ -20,6 +20,8 @@ NICK = "mambrebot"
 
 
 class IRCSock:
+    """DocString de IRCSock.
+    """
     def __init__(self):
         self.client_sock = socket(AF_INET, SOCK_STREAM)
 
