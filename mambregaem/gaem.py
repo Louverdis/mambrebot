@@ -2,7 +2,7 @@
 """
 Created on 05/03/2015
 
-@author: Luis Mario
+@author: Luis Mario Reyes
 """
 import random
 
