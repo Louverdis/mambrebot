@@ -1,7 +1,7 @@
 """
 Created on 07/03/2015
 
-@author: Luis Mario
+@author: Luis Mario Reyes
 """
 
 from mambregaem.entidades import Tributo, Arma, Trampa
