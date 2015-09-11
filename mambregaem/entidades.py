@@ -2,7 +2,7 @@
 """
 Creado el 20/03/2015
 
-@autor: Luis Mario Reyes Moreno
+@autor: Luis Mario Reyes
 """
 import random
 
