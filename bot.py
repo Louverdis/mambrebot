@@ -1,4 +1,4 @@
-__author__ = 'Luis Mario Reyes'
+__author__ = 'Luis Mario Reyes Moreno'
 
 import re
 import inspect
